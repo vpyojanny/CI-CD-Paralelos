@@ -36,11 +36,6 @@ jobs:
         USERNAME: root
         KEY: ${{ secrets.SSH_KEY2}}
       run: |
-        # Crea el directorio de destino si no existe
         ssh -i "$KEY" $USERNAME@$HOST "mkdir -p /App_Movil_Paraleos_Futbol/AppParalelos/www"
-        
-        # Copia y reemplaza los archivos
         scp -i "$KEY" -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/App_Movil_Paraleos_Futbol/AppParalelos/www/
-        
-        # Instala las dependencias en el servidor
         ssh -i "$KEY" $USERNAME@$HOST "cd /App_Movil_Paraleos_Futbol/AppParalelos && npm install"
