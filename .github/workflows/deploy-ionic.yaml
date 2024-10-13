@@ -34,7 +34,7 @@ jobs:
       env:
         HOST: "146.190.219.72"
         USERNAME: root
-        #KEY: ${{ secrets.SSH_KEY2 }}
+        #KEY: ${{ secrets.SSH_KEY2 }}H
       run: |
         ssh -i $USERNAME@$HOST "mkdir -p /App_Movil_Paraleos_Futbol/AppParalelos/www"
         scp -i -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/App_Movil_Paraleos_Futbol/AppParalelos/www/
