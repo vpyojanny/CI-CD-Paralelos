@@ -36,7 +36,11 @@ jobs:
         USERNAME: root
         KEY: ${{ secrets.SSH_KEY2}}
       run: |
-        echo "$KEY" > my_ssh_key
-        chmod 600 my_ssh_key
-        scp -o StrictHostKeyChecking=no -i my_ssh_key -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/App_Movil_Paraleos_Futbol/AppParalelos/
-        ssh -o StrictHostKeyChecking=no -i my_ssh_key $USERNAME@$HOST "echo 'SSH connection successful'"
+        # Crea el directorio de destino si no existe
+        ssh -i "$KEY" $USERNAME@$HOST "mkdir -p /App_Movil_Paraleos_Futbol/AppParalelos/www"
+        
+        # Copia y reemplaza los archivos
+        scp -i "$KEY" -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/App_Movil_Paraleos_Futbol/AppParalelos/www/
+        
+        # Instala las dependencias en el servidor
+        ssh -i "$KEY" $USERNAME@$HOST "cd /App_Movil_Paraleos_Futbol/AppParalelos && npm install"
