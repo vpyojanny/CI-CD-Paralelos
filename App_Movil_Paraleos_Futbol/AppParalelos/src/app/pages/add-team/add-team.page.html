@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar Equipo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="addTeam()">
+    <ion-item>
+      <ion-label position="floating">Nombre del Equipo</ion-label>
+      <ion-input [(ngModel)]="team.name" name="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Ciudad</ion-label>
+      <ion-input [(ngModel)]="team.city" name="city"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit">Agregar Equipo</ion-button>
+  </form>
+</ion-content>

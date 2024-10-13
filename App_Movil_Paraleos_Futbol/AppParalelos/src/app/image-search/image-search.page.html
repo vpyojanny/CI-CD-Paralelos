@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Buscar Imágenes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Buscar imágenes de jugador</ion-label>
+    <ion-input [(ngModel)]="query"></ion-input>
+  </ion-item>
+  <ion-button expand="full" (click)="searchImages()">Buscar</ion-button>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let image of images">
+        <ion-card (click)="selectImage(image)">
+          <img [src]="image" />
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

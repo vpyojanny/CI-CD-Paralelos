@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Jugadores</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let player of players">
+      <ion-label>
+        <h2>{{ player.name }}</h2>
+        <p>{{ player.position }}</p>
+      </ion-label>
+      <ion-button color="danger" (click)="deletePlayer(player.id)">Eliminar</ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" routerLink="/add-player">Agregar Jugador</ion-button>
+</ion-content>

@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Equipos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let team of teams">
+      <ion-label>
+        <h2>{{ team.name }}</h2>
+        <p>{{ team.city }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" routerLink="/add-team">Agregar Equipo</ion-button>
+</ion-content>
