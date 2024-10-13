@@ -1,0 +1,39 @@
+name: Deploy Ionic App
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: |
+        cd ionic-angular-app
+        npm install
+
+    - name: Build Ionic app
+      run: |
+        cd ionic-angular-app
+        npm run build
+
+    - name: Deploy to server
+      env:
+        HOST: ${{ secrets.SERVER_HOST }}
+        USERNAME: ${{ secrets.SERVER_USER }}
+        KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        scp -i "$KEY" -r ionic-angular-app/www/* $USERNAME@$HOST:/path/to/deployment/ionic-angular-app/
+        ssh -i "$KEY" $USERNAME@$HOST "cd /path/to/deployment/ionic-angular-app && npm install"

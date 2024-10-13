@@ -1,0 +1,39 @@
+name: Deploy NestJS App
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: |
+        cd nestjs-app
+        npm install
+
+    - name: Build NestJS app
+      run: |
+        cd nestjs-app
+        npm run build
+
+    - name: Deploy to server
+      env:
+        HOST: ${{ secrets.SERVER_HOST }}
+        USERNAME: ${{ secrets.SERVER_USER }}
+        KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        scp -i "$KEY" -r nestjs-app/dist/* $USERNAME@$HOST:/path/to/deployment/nestjs-app/
+        ssh -i "$KEY" $USERNAME@$HOST "cd /path/to/deployment/nestjs-app && npm install && pm2 restart all"
