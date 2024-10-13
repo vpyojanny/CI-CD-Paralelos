@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar Jugador</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="addPlayer()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="player.name" name="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Posición</ion-label>
+      <ion-input [(ngModel)]="player.position" name="position"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">ID del Equipo</ion-label>
+      <ion-input [(ngModel)]="player.team_id" name="team_id"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit">Agregar Jugador</ion-button>
+  </form>
+</ion-content>
