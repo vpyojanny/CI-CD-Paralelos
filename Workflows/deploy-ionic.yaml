@@ -34,7 +34,7 @@ jobs:
       env:
         HOST: "146.190.219.72"
         USERNAME: root
-        KEY: ${{ secrets.SSH_KEY }}
+        KEY: ${{ secrets.SSH_KEY }} #calve ssh
       run: |
         scp -i "$KEY" -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/path/to/deployment/App_Movil_Paraleos_Futbol/AppParalelos/
         ssh -i "$KEY" $USERNAME@$HOST "cd /path/to/deployment/App_Movil_Paraleos_Futbol/AppParalelos && npm install"
