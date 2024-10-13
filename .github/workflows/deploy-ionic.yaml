@@ -38,5 +38,6 @@ jobs:
       run: |
         echo "$KEY" > my_ssh_key
         chmod 600 my_ssh_key
-        scp -i my_ssh_key -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/App_Movil_Paraleos_Futbol/AppParalelos/
-        ssh -i my_ssh_key $USERNAME@$HOST "echo 'SSH connection successful'"
+        scp -o StrictHostKeyChecking=no -i my_ssh_key -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/App_Movil_Paraleos_Futbol/AppParalelos/
+        ssh -o StrictHostKeyChecking=no -i my_ssh_key $USERNAME@$HOST "echo 'SSH connection successful'" rm my_ssh_key
+
