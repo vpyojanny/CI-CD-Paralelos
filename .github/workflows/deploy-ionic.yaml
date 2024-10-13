@@ -2,7 +2,7 @@ name: Deploy Ionic App
 
 on:
   pull_request:
-    types: [opened,closed]
+    types: [closed]
     branches:
       - main
       - master
@@ -34,10 +34,9 @@ jobs:
       env:
         HOST: "146.190.219.72"
         USERNAME: root
-        KEY: ${{ secrets.SSH_KEY }} #calve ssh2
+        KEY: ${{ secrets.SSH_KEY }}
       run: |
         echo "$KEY" > my_ssh_key
         chmod 600 my_ssh_key
         scp -o StrictHostKeyChecking=no -i my_ssh_key -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/App_Movil_Paraleos_Futbol/AppParalelos/
-        ssh -o StrictHostKeyChecking=no -i my_ssh_key $USERNAME@$HOST "echo 'SSH connection successful'" rm my_ssh_key
-
+        ssh -o StrictHostKeyChecking=no -i my_ssh_key $USERNAME@$HOST "echo 'SSH connection successful'"
