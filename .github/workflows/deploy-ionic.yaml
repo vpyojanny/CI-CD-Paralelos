@@ -34,14 +34,7 @@ jobs:
       env:
         HOST: "146.190.219.72"
         USERNAME: root
-        KEY: |
-          -----BEGIN OPENSSH PRIVATE KEY-----
-          b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
-          QyNTUxOQAAACAUXlzteGlfA8UmyLRXCOdV3lZdp7/fpt4Xl3LO5PYEiQAAAJAt7obELe6G
-          xAAAAAtzc2gtZWQyNTUxOQAAACAUXlzteGlfA8UmyLRXCOdV3lZdp7/fpt4Xl3LO5PYEiQ
-          AAAEB5n9iCnas46PkLJxmUtsGiV1FcBeOikUfc/Fp1enAQeRReXO14aV8DxSbItFcI51Xe
-          Vl2nv9+m3heXcs7k9gSJAAAADHlvamFuQEVORFlQQwE=
-          -----END OPENSSH PRIVATE KEY-----
+        KEY: ${{ secrets.SSH_KEY2 }}
       run: |
         ssh -i "$KEY" $USERNAME@$HOST "mkdir -p /App_Movil_Paraleos_Futbol/AppParalelos/www"
         scp -i "$KEY" -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/App_Movil_Paraleos_Futbol/AppParalelos/www/
