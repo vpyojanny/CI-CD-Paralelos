@@ -36,7 +36,7 @@ jobs:
         USERNAME: root
         KEY: ${{ secrets.SSH_KEY }} #calve ssh2
       run: |
-        mkdir -p ~/.ssh
-        echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-        scp -i "$KEY" -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/App_Movil_Paraleos_Futbol/AppParalelos/
-        ssh -i "$KEY" $USERNAME@$HOST "cd /App_Movil_Paraleos_Futbol/AppParalelos && npm install"
+        echo "$KEY" > my_ssh_key
+        chmod 600 my_ssh_key
+        scp -i my_ssh_key -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/App_Movil_Paraleos_Futbol/AppParalelos/
+        ssh -i my_ssh_key $USERNAME@$HOST "echo 'SSH connection successful'"
