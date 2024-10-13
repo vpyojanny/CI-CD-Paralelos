@@ -36,5 +36,5 @@ jobs:
         USERNAME: root
         KEY: ${{ secrets.SSH_KEY }} #calve ssh
       run: |
-        scp -i "$KEY" -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/path/to/deployment/App_Movil_Paraleos_Futbol/AppParalelos/
-        ssh -i "$KEY" $USERNAME@$HOST "cd /path/to/deployment/App_Movil_Paraleos_Futbol/AppParalelos && npm install"
+        scp -i "$KEY" -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/App_Movil_Paraleos_Futbol/AppParalelos/
+        ssh -i "$KEY" $USERNAME@$HOST "cd /App_Movil_Paraleos_Futbol/AppParalelos && npm install"
