@@ -36,5 +36,7 @@ jobs:
         USERNAME: root
         KEY: ${{ secrets.SSH_KEY }} #calve ssh
       run: |
+        mkdir -p ~/.ssh
+        echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
         scp -i "$KEY" -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/App_Movil_Paraleos_Futbol/AppParalelos/
         ssh -i "$KEY" $USERNAME@$HOST "cd /App_Movil_Paraleos_Futbol/AppParalelos && npm install"
