@@ -34,7 +34,7 @@ jobs:
       env:
         HOST: "146.190.219.72"
         USERNAME: root
-        KEY: ${{ secrets.SSH_KEY }} #calve ssh
+        KEY: ${{ secrets.SSH_KEY }} #calve ssh2
       run: |
         mkdir -p ~/.ssh
         echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
