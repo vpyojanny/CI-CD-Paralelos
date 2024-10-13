@@ -22,12 +22,12 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd ionic-angular-app
+        cd App_Movil_Paraleos_Futbol/AppParalelos
         npm install
 
     - name: Build Ionic app
       run: |
-        cd ionic-angular-app
+        cd App_Movil_Paraleos_Futbol/AppParalelos
         npm run build
 
     - name: Deploy to server
@@ -36,5 +36,5 @@ jobs:
         USERNAME: root
         KEY: ${{ secrets.SSH_KEY }}
       run: |
-        scp -i "$KEY" -r ionic-angular-app/www/* $USERNAME@$HOST:/path/to/deployment/ionic-angular-app/
-        ssh -i "$KEY" $USERNAME@$HOST "cd /path/to/deployment/ionic-angular-app && npm install"
+        scp -i "$KEY" -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/path/to/deployment/App_Movil_Paraleos_Futbol/AppParalelos/
+        ssh -i "$KEY" $USERNAME@$HOST "cd /path/to/deployment/App_Movil_Paraleos_Futbol/AppParalelos && npm install"
