@@ -2,9 +2,11 @@ name: Deploy NestJS App
 
 on:
   pull_request:
+    types: [closed]
     branches:
       - main
       - master
+
 
 jobs:
   build-and-deploy:
@@ -31,9 +33,10 @@ jobs:
 
     - name: Deploy to server
       env:
-        HOST: ${{ secrets.SERVER_HOST }}
-        USERNAME: ${{ secrets.SERVER_USER }}
-        KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        HOST: "146.190.219.72"
+        USERNAME: root
+        KEY: ${{ secrets.SSH_KEY }}
+
       run: |
         scp -i "$KEY" -r nestjs-app/dist/* $USERNAME@$HOST:/path/to/deployment/nestjs-app/
         ssh -i "$KEY" $USERNAME@$HOST "cd /path/to/deployment/nestjs-app && npm install && pm2 restart all"

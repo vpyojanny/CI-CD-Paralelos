@@ -2,6 +2,7 @@ name: Deploy Ionic App
 
 on:
   pull_request:
+    types: [closed]
     branches:
       - main
       - master
@@ -31,9 +32,9 @@ jobs:
 
     - name: Deploy to server
       env:
-        HOST: ${{ secrets.SERVER_HOST }}
-        USERNAME: ${{ secrets.SERVER_USER }}
-        KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        HOST: "146.190.219.72"
+        USERNAME: root
+        KEY: ${{ secrets.SSH_KEY }}
       run: |
         scp -i "$KEY" -r ionic-angular-app/www/* $USERNAME@$HOST:/path/to/deployment/ionic-angular-app/
         ssh -i "$KEY" $USERNAME@$HOST "cd /path/to/deployment/ionic-angular-app && npm install"
