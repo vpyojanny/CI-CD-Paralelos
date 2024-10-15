@@ -39,11 +39,10 @@ jobs:
       shell: bash
       env:
           SSH_PRIVATE_KEY: ${{secrets.SSH_KEY}}
-          SSH_KNOWN_HOSTS: ${{secrets.SSH_HOSTNAME}}
     - name: Deploy to server
       env:
         HOST: "146.190.219.72"
         USERNAME: root
       run: |
         scp -i "$SSH_PRIVATE_KEY" -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/path/to/deployment/App_Movil_Paraleos_Futbol/AppParalelos/
-        ssh -i "$SSH_KNOWN_HOSTS" $USERNAME@$HOST "cd /path/to/deployment/App_Movil_Paraleos_Futbol/AppParalelos && npm install"
+        ssh -i "$SSH_PRIVATE_KEY" $USERNAME@$HOST "cd /path/to/deployment/App_Movil_Paraleos_Futbol/AppParalelos && npm install"
