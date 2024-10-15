@@ -29,12 +29,21 @@ jobs:
       run: |
         cd App_Movil_Paraleos_Futbol/AppParalelos
         npm run build
-
+    - name: Create SSH key
+      run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/private.key
+          sudo chmod 600 ~/.ssh/private.key
+          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          sudo chmod 600 ~/.ssh/known_hosts
+      shell: bash
+      env:
+          SSH_PRIVATE_KEY: ${{secrets.SSH_KEY}}
+          SSH_KNOWN_HOSTS: ${{secrets.SSH_HOSTNAME}}
     - name: Deploy to server
       env:
         HOST: "146.190.219.72"
         USERNAME: root
-        KEY: ${{ secrets.SSH_KEY2 }}
       run: |
-        scp -i "$KEY" -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/path/to/deployment/App_Movil_Paraleos_Futbol/AppParalelos/
-        ssh -i "$KEY" $USERNAME@$HOST "cd /path/to/deployment/App_Movil_Paraleos_Futbol/AppParalelos && npm install"
+        scp -i "$SSH_PRIVATE_KEY" -r App_Movil_Paraleos_Futbol/AppParalelos/www/* $USERNAME@$HOST:/path/to/deployment/App_Movil_Paraleos_Futbol/AppParalelos/
+        ssh -i "$SSH_KNOWN_HOSTS" $USERNAME@$HOST "cd /path/to/deployment/App_Movil_Paraleos_Futbol/AppParalelos && npm install"
