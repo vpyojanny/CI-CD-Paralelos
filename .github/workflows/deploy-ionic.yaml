@@ -20,6 +20,7 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '18.19'
+        token: ${{secrets.do_token}}
 
     - name: Install dependencies
       run: |
@@ -30,16 +31,6 @@ jobs:
       run: |
         cd App_Movil_Paraleos_Futbol/AppParalelos
         npm run build
-    - name: Create SSH key
-      run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/private.key
-          sudo chmod 600 ~/.ssh/private.key
-          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-          sudo chmod 600 ~/.ssh/known_hosts
-      shell: bash
-      env:
-          SSH_PRIVATE_KEY: ${{secrets.SSH_KEY}}
     - name: Deploy to server
       env:
         HOST: "146.190.219.72"
